@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tech_test_payment_api.Data;
 
@@ -10,9 +11,10 @@ using tech_test_payment_api.Data;
 namespace tech_test_payment_api.Migrations
 {
     [DbContext(typeof(PaymentAPIContext))]
-    partial class PaymentAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20220827224937_AddSalesTable")]
+    partial class AddSalesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
