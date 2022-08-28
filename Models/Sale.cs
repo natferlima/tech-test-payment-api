@@ -6,5 +6,6 @@ namespace tech_test_payment_api.Models
         public DateTime Date { get; set; }
         public int SellerId { get; set; }
         public List<Product>? Items { get; set; }
+        public string? Status { get; set; }
     }
 }

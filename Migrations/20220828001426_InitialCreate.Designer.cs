@@ -11,8 +11,8 @@ using tech_test_payment_api.Data;
 namespace tech_test_payment_api.Migrations
 {
     [DbContext(typeof(PaymentAPIContext))]
-    [Migration("20220827224937_AddSalesTable")]
-    partial class AddSalesTable
+    [Migration("20220828001426_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace tech_test_payment_api.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>
@@ -52,7 +52,12 @@ namespace tech_test_payment_api.Migrations
                     b.Property<int>("SellerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SellerId");
 
                     b.ToTable("Sales");
                 });
@@ -85,6 +90,15 @@ namespace tech_test_payment_api.Migrations
                     b.HasOne("tech_test_payment_api.Models.Sale", null)
                         .WithMany("Items")
                         .HasForeignKey("SaleId");
+                });
+
+            modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>
+                {
+                    b.HasOne("tech_test_payment_api.Models.Seller", null)
+                        .WithMany()
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>
