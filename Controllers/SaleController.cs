@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using tech_test_payment_api.Interfaces;
 using tech_test_payment_api.Models;
 using tech_test_payment_api.Repository.Interfaces;
 
@@ -45,5 +44,20 @@ namespace tech_test_payment_api.Controllers
                     : BadRequest("Erro ao salvar venda");
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, string status)
+        {
+            if(id <= 0) return BadRequest("Venda não encontrada");
+
+            var saleDatabase = await _repository.GetById(id);
+
+            saleDatabase.Status = status;
+
+            _repository.Update(saleDatabase);
+
+            return await _repository.SaveChanges()
+                    ? Ok("Venda atualizada com sucesso!")
+                    : BadRequest("Erro ao atualizar venda");
+        }
     }
 }
