@@ -20,7 +20,7 @@ namespace tech_test_payment_api.Controllers
             var sales = await _repository.Get();
             return sales.Any()
                     ? Ok(sales)
-                    : NotFound("Venda não encontrado!");
+                    : NotFound("Nenhuma venda encontrada!");
         }
 
         [HttpGet("{id}")]
@@ -29,7 +29,7 @@ namespace tech_test_payment_api.Controllers
             var sale = await _repository.GetById(id);
             return sale != null
                     ? Ok(sale)
-                    : NotFound("Venda não encontrado!");
+                    : NotFound("Venda não encontrada!");
         }
 
         [HttpPost]
