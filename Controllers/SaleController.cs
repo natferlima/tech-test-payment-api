@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using tech_test_payment_api.Interfaces;
+using tech_test_payment_api.Models;
 using tech_test_payment_api.Repository.Interfaces;
 
 namespace tech_test_payment_api.Controllers
@@ -30,5 +32,18 @@ namespace tech_test_payment_api.Controllers
                     ? Ok(sale)
                     : NotFound("Venda não encontrado!");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Sale sale)
+        {
+            if(sale == null) return BadRequest("Dados inválidos");
+
+            _repository.Add(sale);
+
+            return await _repository.SaveChanges()
+                    ? Ok("Venda adicionada com sucesso!")
+                    : BadRequest("Erro ao salvar venda");
+        }
+
     }
 }
