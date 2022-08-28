@@ -15,7 +15,10 @@ namespace tech_test_payment_api.Repository
 
         public async Task<IEnumerable<Sale>> Get()
         {
-            var sales = await _context.Sales.Include( x => x.Items).ToListAsync();
+            var sales = await _context.Sales
+                                .Include( x => x.Items)
+                                .Include( x => x.Seller)
+                                .ToListAsync();
             return sales;
         }
 
@@ -23,6 +26,7 @@ namespace tech_test_payment_api.Repository
         {
             var sale = await _context.Sales
                                 .Include( x => x.Items)
+                                .Include( x => x.Seller)
                                 .Where(x => x.Id == id).FirstOrDefaultAsync();
             return sale;
         }

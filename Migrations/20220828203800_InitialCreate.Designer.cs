@@ -11,7 +11,7 @@ using tech_test_payment_api.Data;
 namespace tech_test_payment_api.Migrations
 {
     [DbContext(typeof(PaymentAPIContext))]
-    [Migration("20220828033141_InitialCreate")]
+    [Migration("20220828203800_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,8 +77,8 @@ namespace tech_test_payment_api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -94,11 +94,13 @@ namespace tech_test_payment_api.Migrations
 
             modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>
                 {
-                    b.HasOne("tech_test_payment_api.Models.Seller", null)
+                    b.HasOne("tech_test_payment_api.Models.Seller", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>
