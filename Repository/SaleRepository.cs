@@ -13,15 +13,17 @@ namespace tech_test_payment_api.Repository
             _context = context;
         }
 
-        public IEnumerable<Sale> Get()
+        public async Task<IEnumerable<Sale>> Get()
         {
-            var sale = _context.Sales.Include( x => x.Items).ToList();
-            return sale;
+            var sales = await _context.Sales.Include( x => x.Items).ToListAsync();
+            return sales;
         }
 
-        public Sale GetById(int id)
+        public async Task<Sale> GetById(int id)
         {
-            var sale = _context.Sales.Include( x => x.Items).Where(x => x.Id == id).FirstOrDefault();
+            var sale = await _context.Sales
+                                .Include( x => x.Items)
+                                .Where(x => x.Id == id).FirstOrDefaultAsync();
             return sale;
         }
     }

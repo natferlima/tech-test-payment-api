@@ -4,7 +4,7 @@ namespace tech_test_payment_api.Repository.Interfaces
 {
     public interface ISaleRepository : IBaseRepository
     {
-        IEnumerable<Sale> Get();
-        Sale GetById(int id);
+        Task<IEnumerable<Sale>> Get();
+        Task<Sale> GetById(int id);
     }
 }

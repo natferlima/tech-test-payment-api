@@ -11,7 +11,7 @@ using tech_test_payment_api.Data;
 namespace tech_test_payment_api.Migrations
 {
     [DbContext(typeof(PaymentAPIContext))]
-    [Migration("20220828001426_InitialCreate")]
+    [Migration("20220828033141_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace tech_test_payment_api.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>

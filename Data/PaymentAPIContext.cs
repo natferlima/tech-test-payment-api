@@ -12,6 +12,8 @@ namespace tech_test_payment_api.Data
         public DbSet<Seller>? Sellers {get; set;}
         public DbSet<Sale>? Sales {get; set;}
 
+        public DbSet<Product>? Products {get; set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Sale>()

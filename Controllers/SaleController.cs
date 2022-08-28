@@ -14,18 +14,18 @@ namespace tech_test_payment_api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var sales = _repository.Get();
+            var sales = await _repository.Get();
             return sales.Any()
                     ? Ok(sales)
                     : NotFound("Venda não encontrado!");
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var sale = _repository.GetById(id);
+            var sale = await _repository.GetById(id);
             return sale != null
                     ? Ok(sale)
                     : NotFound("Venda não encontrado!");

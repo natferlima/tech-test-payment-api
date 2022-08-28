@@ -57,7 +57,7 @@ namespace tech_test_payment_api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -68,9 +68,9 @@ namespace tech_test_payment_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Sales_SaleId",
+                        name: "FK_Products_Sales_SaleId",
                         column: x => x.SaleId,
                         principalTable: "Sales",
                         principalColumn: "Id");
@@ -78,8 +78,8 @@ namespace tech_test_payment_api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_SaleId",
-                table: "Product",
+                name: "IX_Products_SaleId",
+                table: "Products",
                 column: "SaleId");
 
             migrationBuilder.CreateIndex(
@@ -91,7 +91,7 @@ namespace tech_test_payment_api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Sales");

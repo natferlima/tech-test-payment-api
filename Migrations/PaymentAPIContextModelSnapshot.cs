@@ -35,7 +35,7 @@ namespace tech_test_payment_api.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("tech_test_payment_api.Models.Sale", b =>

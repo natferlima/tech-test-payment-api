@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using tech_test_payment_api.Data;
 using tech_test_payment_api.Models;
 using tech_test_payment_api.Repository.Interfaces;
@@ -16,14 +13,17 @@ namespace tech_test_payment_api.Repository
             _context = context;
         }
 
-        public IEnumerable<Product> Get()
+        public async Task<IEnumerable<Product>> Get()
         {
-            throw new NotImplementedException();
+            var products = await _context.Products.ToListAsync();
+            return products;
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetById(int id)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products
+                                .Where(x => x.Id == id).FirstOrDefaultAsync();
+            return product;
         }
     }
 }

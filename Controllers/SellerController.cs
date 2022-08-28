@@ -13,9 +13,9 @@ namespace tech_test_payment_api.Controllers
             _repository = repository;
         }
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var sellers = _repository.Get();
+            var sellers = await _repository.Get();
             return sellers.Any()
                     ? Ok(sellers)
                     : NotFound("Vendedor não encontrado!");

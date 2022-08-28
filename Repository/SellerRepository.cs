@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using tech_test_payment_api.Data;
 using tech_test_payment_api.Models;
 using tech_test_payment_api.Repository.Interfaces;
@@ -12,15 +13,17 @@ namespace tech_test_payment_api.Repository
             _context = context;
         }
 
-        public IEnumerable<Seller> Get()
+        public async Task<IEnumerable<Seller>> Get()
         {
-            var seller = _context.Sellers.ToList();
-            return seller;
+            var sellers = await _context.Sellers.ToListAsync();
+            return sellers;
         }
 
-        public Seller GetById(int id)
+        public async Task<Seller> GetById(int id)
         {
-            throw new NotImplementedException();
+            var seller = await _context.Sellers
+                                .Where(x => x.Id == id).FirstOrDefaultAsync();
+            return seller;
         }
     }
 }
