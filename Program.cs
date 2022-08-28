@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using tech_test_payment_api.Data;
+using tech_test_payment_api.Repository;
+using tech_test_payment_api.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,12 @@ builder.Services.AddDbContext<PaymentAPIContext>
         "server=localhost;user=root;password=Nat123456*;database=PaymentAPI",
         Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.30-mysql")
     ));
+builder.Services.AddScoped<IBaseRepository, BaseRepository>();
+builder.Services.AddScoped<ISellerRepository, SellerRepository>();
+builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
 
 var app = builder.Build();
 

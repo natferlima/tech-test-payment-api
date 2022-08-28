@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using tech_test_payment_api.Repository.Interfaces;
 
 namespace tech_test_payment_api.Controllers
 {
@@ -6,10 +7,18 @@ namespace tech_test_payment_api.Controllers
     [Route("api/[controller]")]
     public class SellerController : ControllerBase
     {
+        private readonly ISellerRepository _repository;
+        public SellerController(ISellerRepository repository)
+        {
+            _repository = repository;
+        }
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Tudo certo!!");
+            var sellers = _repository.Get();
+            return sellers.Any()
+                    ? Ok(sellers)
+                    : NotFound("Vendedor não encontrado!");
         }
     }
 }
