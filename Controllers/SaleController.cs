@@ -87,9 +87,11 @@ namespace tech_test_payment_api.Controllers
 
             if(!listStatus.Contains(status)) return BadRequest("Status Permitidos: Pagamento aprovado, Enviado para transportadora, Entregue, Cancelada");
 
-            if(id <= 0) return BadRequest("Venda não encontrada");
+            if(id <= 0) return BadRequest("Dados inválidos!");
 
             var saleDatabase = await _repository.GetById(id);
+
+            if(saleDatabase == null) return NotFound("Venda não encontrada!");
 
             if(saleDatabase.Status == "Aguardando pagamento") {
                 if(status != listStatus[0] && status != listStatus[3]) return BadRequest("Atualizações permitidas: Pagamento aprovado ou Cancelada");
