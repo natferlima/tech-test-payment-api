@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using tech_test_payment_api.Controllers;
@@ -20,6 +16,7 @@ namespace PaymentAPI.Tests
             _controller = new SaleController(_repository);
         }
 
+        [Fact]
         public async Task AddSale_ReturnsOK_WhenSaleCorrect()
         {
             ProductDTO newProduct = new ProductDTO {

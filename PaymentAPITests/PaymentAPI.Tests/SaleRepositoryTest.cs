@@ -15,7 +15,8 @@ namespace PaymentAPI.Tests
         {
             _repository = new SaleRepository(_context);
         }
-        // [Fact]
+        
+        [Fact]
         public async Task GetSales_ReturnSales_WhenExistsSales()
         {
             Product newProduct = new Product {
