@@ -1,9 +1,9 @@
 using FluentValidation;
-using tech_test_payment_api.Models;
+using tech_test_payment_api.Models.DTO;
 
 namespace tech_test_payment_api.Validators
 {
-    public class SaleValidator : AbstractValidator<Sale>
+    public class SaleValidator : AbstractValidator<SaleDTO>
     {
         public SaleValidator() 
         {
@@ -24,7 +24,7 @@ namespace tech_test_payment_api.Validators
                 
                 When(sale => sale.Items != null, () => {
                     RuleFor(sale => sale.Items)
-                        .Must(list => list.Count <= 1)
+                        .Must(list => list!.Count <= 1)
                         .WithMessage("A lista deve conter pelo menos 1 item.");
                     RuleForEach(sale => sale.Items).ChildRules(items => 
                     {
@@ -46,12 +46,7 @@ namespace tech_test_payment_api.Validators
                 RuleFor(sale => sale.Date)
                     .NotEmpty()
                     .WithMessage("O campo não pode ser vazio.");
-                RuleFor(sale => sale.Status)
-                    .NotNull()
-                    .WithMessage("O campo é obrigatório!");
-                RuleFor(sale => sale.Status)
-                    .NotEmpty()
-                    .WithMessage("O campo não pode ser vazio.");
+                
                 RuleFor(sale => sale.Seller)
                     .NotNull()
                     .WithMessage("O campo é obrigatório!");
@@ -60,44 +55,46 @@ namespace tech_test_payment_api.Validators
                     .WithMessage("O campo é obrigatório!");
 
                 When(sale => sale.Seller != null, () => {
-                    RuleFor(sale => sale.Seller.CPF)
+                    RuleFor(sale => sale.Seller!.CPF)
                         .NotNull()
                         .WithMessage("O campo é obrigatório!");
-                    RuleFor(sale => sale.Seller.CPF)
+                    RuleFor(sale => sale.Seller!.CPF)
                         .NotEmpty()
                         .WithMessage("O campo não pode ser vazio!");
                     RuleFor(sale => sale.Seller!.CPF)
                         .Matches("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}")
                         .WithMessage("O campo é invalido! Formato correto para CPF: 123.123.123-12");
-                    RuleFor(sale => sale.Seller.Name)
+                    RuleFor(sale => sale.Seller!.Name)
                         .NotNull()
                         .WithMessage("O campo é obrigatório!");
-                    RuleFor(sale => sale.Seller.Name)
+                    RuleFor(sale => sale.Seller!.Name)
                         .NotEmpty()
                         .WithMessage("O campo não pode ser vazio.");
-                    RuleFor(sale => sale.Seller.Name)
+                    RuleFor(sale => sale.Seller!.Name)
                         .MinimumLength(3)
                         .WithMessage("O campo deve ter pelo menos 3 caracteres.");
-                    RuleFor(sale => sale.Seller.Email)
+                    RuleFor(sale => sale.Seller!.Email)
                         .NotNull()
                         .WithMessage("O campo é obrigatório!");
-                    RuleFor(sale => sale.Seller.Name)
+                    RuleFor(sale => sale.Seller!.Name)
                         .NotEmpty()
                         .WithMessage("O campo não pode ser vazio.");
-                    RuleFor(sale => sale.Seller.Email)
+                    RuleFor(sale => sale.Seller!.Email)
                         .EmailAddress()
                         .WithMessage("O campo é inválido.");
-                    RuleFor(sale => sale.Seller.PhoneNumber)
+                    RuleFor(sale => sale.Seller!.PhoneNumber)
                         .NotNull()
                         .WithMessage("O campo é obrigatório!");
-                    RuleFor(sale => sale.Seller.PhoneNumber)
+                    RuleFor(sale => sale.Seller!.PhoneNumber)
                         .NotEmpty()
                         .WithMessage("O campo não pode ser vazio.");
                     RuleFor(sale => sale.Seller!.PhoneNumber)
                         .Matches("[0-9]{11}")
                         .WithMessage("O campo deve ter 11 números");
-                });   
+                });
+
             });  
         }
+
     }
 }

@@ -15,15 +15,15 @@ namespace tech_test_payment_api.Repository
 
         public async Task<IEnumerable<Product>> Get()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products!.ToListAsync();
             return products;
         }
 
         public async Task<Product> GetById(int id)
         {
-            var product = await _context.Products
+            var product = await _context.Products!
                                 .Where(x => x.Id == id).FirstOrDefaultAsync();
-            return product;
+            return product!;
         }
     }
 }
