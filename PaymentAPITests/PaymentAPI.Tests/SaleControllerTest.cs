@@ -20,7 +20,7 @@ namespace PaymentAPI.Tests
             _controller = new SaleController(_repository);
         }
 
-        public async Task AdicionaUsuario_RetornaOK_QuandoPassaUsuario()
+        public async Task AddSale_ReturnsOK_WhenSaleCorrect()
         {
             ProductDTO newProduct = new ProductDTO {
                 Name = "ProductName"
